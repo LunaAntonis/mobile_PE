@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "432303747220",
+    "project_id": "dogfitness-730dd",
+    "storage_bucket": "dogfitness-730dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432303747220:android:600e93ab90e7b7406b8481",
+        "android_client_info": {
+          "package_name": "be.luna.antonis.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432303747220-d3gc2t80qnlpooog6ojgsd28u14rikjj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "be.luna.antonis.project",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "432303747220-nl4nk8q2u2e7mpgri4309b31hjbcnd1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD75jTPrBhUEh4xZiVLpI33axGdEPtpE9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432303747220-nl4nk8q2u2e7mpgri4309b31hjbcnd1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,6 @@
+import { AuthProvider, useSignIn } from '@/api/auth';
+import useUser from '@/hooks/useUser';
+import { Redirect } from 'expo-router';
 import React from 'react';
 import {
   View,
@@ -13,6 +16,13 @@ import {
 const { width } = Dimensions.get('window');
 
 export default function LoginScreen() {
+  const {mutate: signInWithSocialAuth} = useSignIn()
+  const user = useUser()  
+
+  if (user) {
+    return <Redirect href="/diary" />
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.background}>
@@ -50,8 +60,8 @@ export default function LoginScreen() {
           <Text style={styles.subtitle}>THE DOG FITNESS APP</Text>
 
           {/* Login button */}
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.loginText}>Login</Text>
+          <TouchableOpacity style={styles.loginButton} onPress={() => signInWithSocialAuth({provider: AuthProvider.GOOGLE})}>
+            <Text style={styles.loginText}>Login with Google</Text>
           </TouchableOpacity>
 
             {/* Create account link */}

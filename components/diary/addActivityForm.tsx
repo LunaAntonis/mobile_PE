@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from 'react-native';
-import { X } from 'lucide-react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-interface AddActivityFormProps {
-  visible: boolean;
+interface FormProps {
+  onSubmit: (values: { type: string, duration: number, distance: number | undefined, petName: string }) => void;
   onClose: () => void;
-  onSubmit: (activity: {
-    type: string;
-    duration: number;
-    distance?: number;
-    petName: string;
-  }) => void;
 }
 
-export default function AddActivityForm({ visible, onClose, onSubmit }: AddActivityFormProps) {
+const AddActivityForm = ({ onSubmit, onClose }: FormProps) => {
   const [type, setType] = useState('');
   const [duration, setDuration] = useState('');
   const [distance, setDistance] = useState('');
@@ -35,130 +28,59 @@ export default function AddActivityForm({ visible, onClose, onSubmit }: AddActiv
   };
 
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      transparent={true}
-    >
-      <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
-          <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>Add Activity</Text>
-            <TouchableOpacity onPress={onClose}>
-              <X color="#6B7280" size={24} />
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.form}>
-            <View style={styles.formField}>
-              <Text style={styles.label}>Activity Type</Text>
-              <TextInput
-                style={styles.input}
-                value={type}
-                onChangeText={setType}
-                placeholder="e.g., Walk, Play, Feed"
-              />
-            </View>
-
-            <View style={styles.formField}>
-              <Text style={styles.label}>Duration (minutes)</Text>
-              <TextInput
-                style={styles.input}
-                value={duration}
-                onChangeText={setDuration}
-                keyboardType="numeric"
-                placeholder="30"
-              />
-            </View>
-
-            <View style={styles.formField}>
-              <Text style={styles.label}>Distance (km, optional)</Text>
-              <TextInput
-                style={styles.input}
-                value={distance}
-                onChangeText={setDistance}
-                keyboardType="numeric"
-                placeholder="2.5"
-              />
-            </View>
-
-            <View style={styles.formField}>
-              <Text style={styles.label}>Pet Name</Text>
-              <TextInput
-                style={styles.input}
-                value={petName}
-                onChangeText={setPetName}
-                placeholder="Enter pet name"
-              />
-            </View>
-
-            <TouchableOpacity 
-              style={styles.submitButton}
-              onPress={handleSubmit}
-            >
-              <Text style={styles.submitButtonText}>Add Activity</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </Modal>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Type"
+        value={type}
+        onChangeText={setType}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Duration"
+        value={duration}
+        onChangeText={setDuration}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Distance"
+        value={distance}
+        onChangeText={setDistance}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Pet Name"
+        value={petName}
+        onChangeText={setPetName}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    padding: 24,
-    maxHeight: '80%',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1F2937',
-  },
-  form: {
-    gap: 16,
-  },
-  formField: {
-    gap: 8,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#4B5563',
+  container: {
+    padding: 16,
   },
   input: {
+    marginBottom: 16,
+    padding: 8,
     borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 8,
+    borderColor: '#ccc',
+    borderRadius: 4,
+  },
+  button: {
+    backgroundColor: '#007bff',
     padding: 12,
-    fontSize: 16,
-    color: '#1F2937',
+    borderRadius: 4,
   },
-  submitButton: {
-    backgroundColor: '#F59E0B',
-    padding: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  submitButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
+export default AddActivityForm;
